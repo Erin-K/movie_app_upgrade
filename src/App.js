@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) { // 시작전 호출
+    super(props);
+    console.log('before render component')
+  }
+  state = {
+    count: 0
+  };
+
+  add = () => {
+    this.setState(current => ({
+      count: current.count+1
+    }))
+  };
+  minus = () => {
+    this.setState(current => ({
+      count: current.count-1
+    }))
+  };
+
+  componentDidMount() {
+    console.log('component rendered')
+  }
+
+  componentDidUpdate() {
+    console.log('update')
+  }
+
+  componentWillUnmount() {
+    console.log('goodbye component')
+  }
+
+  render() {
+    console.log('rendering')
+    return (
+      <div>
+        <h1>the number is: {this.state.count}</h1>
+        <button onClick={this.add}>add</button>
+        <button onClick={this.minus}>minus</button>
+      </div>
+    )
+  }
 }
 
 export default App;
